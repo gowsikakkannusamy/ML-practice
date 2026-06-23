@@ -1,12 +1,21 @@
 import pandas as pd
-data = {
-    'Marks': [80, 75, 90, 85, 70, 95, 88]
-}
 
-df = pd.DataFrame(data)
-print("Statistical Report:")
-print(df.describe())
-print("\nMean:", df['Marks'].mean())
-print("Median:", df['Marks'].median())
-print("Mode:", df['Marks'].mode()[0])
-print("Standard Deviation:", df['Marks'].std())
+# Read dataset
+df = pd.read_csv("data.csv")
+
+# Show missing values
+print("Missing Values:")
+print(df.isnull().sum())
+
+# Fill missing names with "Unknown"
+df["name"] = df["name"].fillna("Unknown")
+
+# Fill missing roll numbers with "Not Available"
+df["rollno"] = df["rollno"].fillna("Not Available")
+
+# Fill missing marks with average marks
+df["marks"] = df["marks"].fillna(df["marks"].mean())
+
+# Display preprocessed data
+print("\nPreprocessed Data:")
+print(df)

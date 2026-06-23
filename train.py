@@ -1,18 +1,21 @@
 import pandas as pd
-from sklearn.linear_model import LinearRegression
 
-# Load data
-df = pd.read_csv('data.csv')
+# Read dataset
+df = pd.read_csv("data.csv")
 
-# Input and Output
-X = df[['hours']]
-y = df['score']
+# Show missing values
+print("Missing Values:")
+print(df.isnull().sum())
 
-# Train model
-model = LinearRegression()
-model.fit(X, y)
+# Fill missing names with "Unknown"
+df["name"] = df["name"].fillna("Unknown")
 
-# Predict score for 6 hours
-prediction = model.predict([[6]])
+# Fill missing roll numbers with "Not Available"
+df["rollno"] = df["rollno"].fillna("Not Available")
 
-print("Predicted Score for 6 hours:", prediction[0])
+# Fill missing marks with average marks
+df["marks"] = df["marks"].fillna("0")
+
+# Display preprocessed data
+print("\nPreprocessed Data:")
+print(df)
